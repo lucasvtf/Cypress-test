@@ -6,6 +6,7 @@ const typedText = {
     label: 'Apple Inc.',
     value: '1',
   },
+  search: 'Acer Iconia',
 };
 
 describe('Test site Computer Database', () => {
@@ -47,8 +48,8 @@ describe('Test Add a new computer', () => {
     cy.get('#discontinued').type(typedText.discontinued);
     cy.get('#discontinued').should('have.value', typedText.discontinued);
 
-    cy.get('#discontinued').select(typedText.company.label);
-    cy.get('#discontinued').should('have.value', typedText.company.value);
+    cy.get('#company').select(typedText.company.label);
+    cy.get('#company').should('have.value', typedText.company.value);
   });
 
   it('should add a new computer with sucess', () => {
@@ -120,5 +121,33 @@ describe('Test Add a new computer', () => {
     cy.get('.error').should('have.class', 'error');
     cy.get('.error > label').should('have.css', 'color', 'rgb(157, 38, 29)');
     cy.get('.error > .input > .help-inline').should('have.css', 'color', 'rgb(157, 38, 29)');
+  });
+});
+
+describe('Test Computer Database filter', () => {
+  beforeEach(() => {
+    cy.visit('http://computer-database.gatling.io/computers');
+  });
+
+  it('should Computer Database have a filter input and a button "Filter by name"', () => {
+    cy.get('#searchbox').should('exist').and('have.attr', 'placeholder', 'Filter by computer name...');
+    cy.get('#searchsubmit').should('exist').and('have.value', 'Filter by name');
+  });
+
+  it('should be possible to filter a computer', () => {
+    cy.get('#searchbox').type(typedText.search);
+    cy.get('#searchsubmit').click();
+
+    cy.get('tbody').find('tr').should('have.length', 1);
+
+    cy.get('#main > h1').should('have.text', 'One computer found');
+
+    cy.get('tbody > tr > :nth-child(1) > a').should('have.text', typedText.search);
+  });
+
+  it('should not possible to filter a computer when the user does not fill in the input "Filter by computer name..."', () => {
+    cy.get('#searchsubmit').click();
+
+    cy.get('#main > h1').should('have.text', '574 computers found');
   });
 });
