@@ -151,3 +151,44 @@ describe('Test Computer Database filter', () => {
     cy.get('#main > h1').should('have.text', '574 computers found');
   });
 });
+
+describe('Test Edit and Delete a computer', () => {
+  beforeEach(() => {
+    cy.visit('http://computer-database.gatling.io/computers');
+  });
+
+  it('should be possible click on a computera and redirect to the computer page', () => {
+    cy.get('tbody > :nth-child(1) > :nth-child(1) > a').click();
+
+    cy.url().should('eq', 'http://computer-database.gatling.io/computers/381');
+
+    cy.get('#main > h1').should('have.text', 'Edit computer');
+
+    cy.get('#name').should('have.value', 'ACE');
+  });
+
+  it('should be possible edit a computer', () => {
+    cy.get('tbody > :nth-child(1) > :nth-child(1) > a').click();
+
+    cy.get('#name').type(typedText.computerName);
+    cy.get('#introduced').type(typedText.introduced);
+    cy.get('#discontinued').type(typedText.discontinued);
+    cy.get('#company').select(typedText.company.label);
+
+    cy.get('.primary').click();
+
+    cy.get('.alert-message').should('exist');
+    cy.get('.alert-message').contains(typedText.computerName);
+    cy.get('.alert-message').contains('has been updated');
+  });
+
+  it('should be possible delete a computer', () => {
+    cy.get('tbody > :nth-child(1) > :nth-child(1) > a').click();
+
+    cy.get('.topRight > .btn').click({ force: true });
+
+    cy.get('.alert-message').should('exist');
+    cy.get('.alert-message').contains('ACE');
+    cy.get('.alert-message').contains('has been deleted');
+  });
+});
