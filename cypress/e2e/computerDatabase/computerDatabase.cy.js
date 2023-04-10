@@ -157,7 +157,7 @@ describe('Test Edit and Delete a computer', () => {
     cy.visit('http://computer-database.gatling.io/computers');
   });
 
-  it('should be possible click on a computera and redirect to the computer page', () => {
+  it('should be possible click on a computer and redirect to the computer page', () => {
     cy.get('tbody > :nth-child(1) > :nth-child(1) > a').click();
 
     cy.url().should('eq', 'http://computer-database.gatling.io/computers/381');
