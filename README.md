@@ -59,8 +59,18 @@ npm install
 ``` 
 ## Running the tests
 
+# To run on browser
+
  ```bash
  
  npm run cy:open
  
  ```
+ 
+# To run on terminal
+
+```bash
+
+npm run cy:run
+
+```

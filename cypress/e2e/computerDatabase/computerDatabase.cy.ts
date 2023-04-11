@@ -1,4 +1,6 @@
-const typedText = {
+import TypedText from "../../Interfaces/TypedText";
+
+const typedText: TypedText = {
   computerName: 'Cypress Computer Name',
   introduced: '2023-02-25',
   discontinued: '2023-03-03',
