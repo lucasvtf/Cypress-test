@@ -8,6 +8,8 @@
 Write tests in Cypress for the page http://computer-database.gatling.io/computers.
 To do the tests I decided to start with the basics which was testing the elements that appear on the screen, inputs, buttons. Then I started testing the "Add a new computer" screen, I did the tests to cover from the most basic tests to the edge cases  tests. For further testing I tested the main page filter and the edit and delete functionality on a computer.
 
+# Node version: v.16.15.1
+
 # Tests Summary
 1. Test site Computer Database
   - Should render computer database homepage correctly
@@ -59,6 +61,6 @@ npm install
 
  ```bash
  
- npx cypress open
+ npm run cy:open
  
  ```
