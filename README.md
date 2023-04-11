@@ -59,7 +59,7 @@ npm install
 ``` 
 ## Running the tests
 
-# To run on browser
+### To run on browser
 
  ```bash
  
@@ -67,7 +67,7 @@ npm install
  
  ```
  
-# To run on terminal
+### To run on terminal
 
 ```bash
 
